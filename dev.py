@@ -42,10 +42,7 @@ if plugin_name in available_plugins:
     plugin = import_plugin(plugin_name)
     available_commands = get_all_commands(plugin)
 
-    if plugin_cmd == "help": 
-        print(f"Available commands: {available_commands}")
-        print(':')
-    elif plugin_cmd in available_commands: 
+    if plugin_cmd in available_commands: 
         cmd_func = getattr(plugin, plugin_cmd)
         if len(signature(cmd_func).parameters) == 0: 
             result = cmd_func()
