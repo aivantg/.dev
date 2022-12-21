@@ -5,6 +5,7 @@
 export DEV_INSTALL_FOLDER="/Users/aivant/Development/.dev/v2"
 export DEV_ROOT_FOLDER="/Users/aivant/Development"
 
+# Setup function. Called when script is loaded
 dev-setup() {
     # Call setup on dev.py
     output="$(python3 $DEV_INSTALL_FOLDER/dev.py --setup)"
@@ -20,9 +21,9 @@ dev-setup() {
     # Evaluate last line of python program
     eval "$cmd"
 }
-
 dev-setup
 
+# Dev applet. Forwards arguments to `dev.py`, evaluates the last line of result from python script in local terminal
 dev() {
     # Pass arguments to dev.py
     output="$(python3 $DEV_INSTALL_FOLDER/dev.py $@)"
