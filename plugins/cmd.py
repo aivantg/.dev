@@ -1,4 +1,4 @@
-# Plugin Docs: `cd`
+# Plugin Docs: `cmd`
 # setup func runs when terminal opens
 # other functions take in arguments as an array
 # functions return command for bash to run
@@ -15,32 +15,31 @@ def _read_data():
     except: 
         return {}
 
-# Loop through arguments and build cd string, expanding aliases
-def cd(args):
+# Set up aliases on startup
+def setup(): 
     aliases = _read_data()
-    cd_string = "cd " + BASE_PATH
-    for arg in args: 
-        if arg in aliases:
-            cd_string += "/" + aliases[arg]
-        else:
-            cd_string += "/" + arg
-    return cd_string
+    alias_string = ""
+    for alias, cmd in aliases.items(): 
+        alias_string += 'alias ' + alias + '="eval ' + cmd + '";'
+    return alias_string[:-1] # remove final semicolon
+    
 
 # Create new alias
 def mk(args): 
     aliases = _read_data()
-    alias, folder = args[0], args[1]
-    aliases[alias] = folder
+    alias, cmd = args[0], " ".join(args[1:])
+    aliases[alias] = cmd
     with open(DATA_PATH, 'w') as f: 
         json.dump(aliases, f)
+    return 'alias ' + alias + '="eval ' + cmd + '"'
 
 # List all aliases
 def ls(args): 
     aliases = _read_data()
-    print("\n---Current Aliases---\n")
-    for alias, folder in aliases.items(): 
-        print(alias + " ---> " + folder)
-    print("\nAdd more with 'dev cd:mk <alias> <path>'\nRemove with 'dev cd:rm <alias>'\n")
+    print("\n---Current Command Aliases---\n")
+    for alias, cmd in aliases.items(): 
+        print(alias + " ---> " + cmd)
+    print("\nAdd more with 'dev cmd:mk <alias> <cmd>'\nRemove with 'dev cmd:rm <alias>'\n")
 
 # Remove an alias
 def rm(args):

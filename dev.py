@@ -21,10 +21,16 @@ if len(sys.argv) <= 1:
 
 # Setup mode, call 'setup' command on all plugins if available
 if sys.argv[1] == "--setup": 
+    setup_cmd = ""
     for plugin_name in available_plugins: 
         plugin = import_plugin(plugin_name)
-        if 'setup' in dir(plugin): 
-            plugin.setup()
+        try: 
+            result = plugin.setup()
+            if result: 
+                setup_cmd += result + ";"
+        except: 
+            pass
+    print(setup_cmd[:-1])
     quit()
 
 
@@ -36,6 +42,12 @@ if ":" in sys.argv[1]:
 else: 
     plugin_name, plugin_cmd = 'cd', 'cd'
     args = sys.argv[1:]
+
+# If debug flag exists, remove it. Not currently passing it on 
+try: 
+    args.remove('-d')
+except: 
+    pass
 
 # Run plugin with arguments. Print return value as last line of script, to be run by original shell
 if plugin_name in available_plugins: 

@@ -1,0 +1,1 @@
+{"..": "cd ..", "...": "cd ../..", "ip": "curl ipecho.net/plain", "lip": "ipconfig getifaddr en0", "....": "cd ../../..", "rm": "safe-rm", "rmf": "/bin/rm"}
