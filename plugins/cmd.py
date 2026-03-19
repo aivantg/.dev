@@ -5,7 +5,7 @@
 import json
 import os
 
-DATA_PATH = os.getenv('DEV_INSTALL_FOLDER') + '/data/cd.json'
+DATA_PATH = os.getenv('DEV_INSTALL_FOLDER') + '/data/cmd.json'
 BASE_PATH = os.getenv('DEV_ROOT_FOLDER')
 
 def _read_data():
