@@ -2,8 +2,8 @@
 # export DEV_INSTALL_FOLDER="/path/to/dev/folder" # must be absolute path!
 # source "$DEV_INSTALL_FOLDER/dev.sh"
 
-export DEV_INSTALL_FOLDER="/Users/aivant/Development/.dev/v2"
-export DEV_ROOT_FOLDER="/Users/aivant/Development"
+export DEV_INSTALL_FOLDER="/Users/aivant/development/.dev"
+export DEV_ROOT_FOLDER="/Users/aivant/development"
 
 # Setup function. Called when script is loaded
 dev-setup() {

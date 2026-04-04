@@ -24,9 +24,12 @@ def setup():
     
 
 # Create new env var
-def mk(args): 
+def mk(args):
     vars = _read_data()
-    var, val = args[0], " ".join(args[1:])
+    if len(args) == 1 and '=' in args[0]:
+        var, val = args[0].split('=', 1)
+    else:
+        var, val = args[0], " ".join(args[1:])
     vars[var] = val
     with open(DATA_PATH, 'w') as f: 
         json.dump(vars, f)
